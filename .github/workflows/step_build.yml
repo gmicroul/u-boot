@@ -1,0 +1,21 @@
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04-arm
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build u-boot
+        run: |
+          cd fedora-mobility
+          ./build_all_fedora.sh
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fedora-Remix-Mobility-U-Boot
+          path: ./fedora-mobility/output
+
